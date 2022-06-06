@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::API
 
     def index
-        render json: 'API TURBOLYAPP2'
+        render json: 'BACKEND TURBOLYAPP2'
     end
     
 end
