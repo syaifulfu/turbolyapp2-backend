@@ -50,6 +50,7 @@ test:
 #
 production:
   <<: *default
+  host: 127.0.0.1
   database: sample_backend_production
   username: sample_backend
   password: <%= ENV["SAMPLE_BACKEND_DATABASE_PASSWORD"] %>
