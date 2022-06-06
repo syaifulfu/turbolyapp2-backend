@@ -52,5 +52,5 @@ production:
   <<: *default
   host: 49.50.10.53
   database: sample_backend_production
-  username: toor
+  username: root
   password: Lycon@2020
