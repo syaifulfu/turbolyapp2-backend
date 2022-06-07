@@ -3,12 +3,20 @@ class TasksController < ApplicationController
 
   # GET /tasks
   def index
-    @tasks = Task.all
+    @tasks = Task.select("
+      tasks.*,
+      CASE WHEN tasks.due_date = '#{Time.now.strftime("%Y")}-#{Time.now.strftime("%m")}-#{Time.now.strftime("%d")}'
+      THEN true
+      ELSE false
+      END AS is_today
+    ").all
+    @todays = Task.where(due_date: Time.now.in_time_zone('Jakarta').to_date).order(priority: :desc, created_at: :asc)
 
     render json: {
       success: true,
       message: 'Successfuly get data',
-      data: @tasks
+      data: @tasks,
+      todays: @todays,
     }
   end
 
