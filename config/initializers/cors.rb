@@ -8,7 +8,7 @@
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
     # origins "localhost:8080"
-    origins "localhost:8080", "localhost:8082"
+    origins "localhost:8080", "localhost:8082", "turbolyapp2-frontend.herokuapp.com"
     # origins "*"
 
     resource "*",
