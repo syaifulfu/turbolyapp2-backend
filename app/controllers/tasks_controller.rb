@@ -50,7 +50,7 @@ class TasksController < ApplicationController
 
   # PATCH/PUT /tasks/1
   def update
-    if !@task..update(task_params)
+    if !Task.where(id: params[:id]).update(task_params)
       render json: {
         success: false,
         message: 'Failed update task',
@@ -71,13 +71,30 @@ class TasksController < ApplicationController
       render json: {
         success: false,
         message: 'Failed delete data',
-        data: @tasks
+        data: @task
       }
     else
       render json: {
         success: true,
         message: 'Successfuly delete data',
-        data: @tasks
+        data: @task
+      }
+    end
+  end
+
+  def set_completed
+    @task = Task.where(id: params[:id]).update({'is_completed': 1})
+    if !@task
+      render json: {
+        success: false,
+        message: 'Failed set completed',
+        warning: @task.errors
+      }
+    else
+      render json: {
+        success: true,
+        message: 'Successfuly set completed',
+        data: @task
       }
     end
   end
@@ -97,7 +114,7 @@ class TasksController < ApplicationController
         'description': task[:description],
         'due_date': task[:due_date],
         'priority': task[:priority],
-        'is_completed': task[:is_completed],
+        'is_completed': task[:is_completed] ? 1 : 0,
         'created_by': task[:created_by],
       }
     end

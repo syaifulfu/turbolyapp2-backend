@@ -5,7 +5,7 @@ class CreateTasks < ActiveRecord::Migration[7.0]
       t.text :description
       t.date :due_date
       t.integer :priority
-      t.string :is_completed
+      t.boolean :is_completed
       t.string :created_by
 
       t.timestamps
